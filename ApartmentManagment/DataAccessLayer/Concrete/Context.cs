@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,12 @@ namespace DataAccessLayer.Concrete
 {
     public class Context : DbContext
     {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("server=DESKTOP-JGL6DBA; database=ApartmentManagmentDB; integrated security=true");
+        }
+
+
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Expense> Expenses { get; set; }

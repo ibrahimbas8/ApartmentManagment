@@ -10,14 +10,17 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext<User, Role, int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("server=DESKTOP-JGL6DBA; database=ApartmentManagmentDB; integrated security=true");
         }
 
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {       
+            base.OnModelCreating(modelBuilder);
+        }
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Expense> Expenses { get; set; }

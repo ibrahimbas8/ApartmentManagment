@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class User: IdentityUser
+    public class User: IdentityUser<int>
     {
-        public string IdentificationNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string CarLicensePlate { get; set; }

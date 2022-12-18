@@ -2,6 +2,7 @@
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace ApartmentManagment.Controllers
 {
+    [AllowAnonymous]
     public class AdminUser : Controller
     {
         UserManager um = new UserManager(new EfUserRepository());
@@ -21,16 +23,25 @@ namespace ApartmentManagment.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var values = um.GetList();
-            return View(values);
+            return View(await _context.Users.ToListAsync());
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            var values = um.TGetById(id);
-            return View(values);
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
         }
         // GET: Users/Create
         public IActionResult Create()
@@ -43,11 +54,14 @@ namespace ApartmentManagment.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("UserId,FirstName,LastName,Email,Password,TCNo,Phone,ImageURL,CarsPlate,ApartmentOwner,IsDelete,ApartmentId")] User user)
+        public async Task<IActionResult> Create([Bind("Id, FirstName, LastName, Email, PhoneNumber, CarLicencePlate, Flats")] User user)
         {
-            um.TAdd(user);
-            _context.Add(user);
-            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _context.Add(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
             return View(user);
         }
     }

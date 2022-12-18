@@ -164,3 +164,4 @@ C:\Users\basib\OneDrive\Masaüstü\kodlama\projeler\ApartmentManagment\Apartment
 C:\Users\basib\OneDrive\Masaüstü\kodlama\projeler\ApartmentManagment\ApartmentManagment\ApartmentManagment\obj\Debug\net5.0\Razor\Views\Login\AccessDenied.cshtml.g.cs
 C:\Users\basib\OneDrive\Masaüstü\kodlama\projeler\ApartmentManagment\ApartmentManagment\ApartmentManagment\obj\Debug\net5.0\Razor\Views\Shared\_AdminLayout.cshtml.g.cs
 C:\Users\basib\OneDrive\Masaüstü\kodlama\projeler\ApartmentManagment\ApartmentManagment\ApartmentManagment\obj\Debug\net5.0\Razor\Views\Admin\Index.cshtml.g.cs
+C:\Users\basib\OneDrive\Masaüstü\kodlama\projeler\ApartmentManagment\ApartmentManagment\ApartmentManagment\obj\Debug\net5.0\Razor\Views\AdminUser\Index.cshtml.g.cs
